@@ -39,10 +39,6 @@ public class ClienteABM {
 	}
 
 	public void modificar(Cliente c) throws Exception {
-		/*
-		 * implementar antes de actualizar que no exista un cliente con el mismo
-		 * documento a modificar y con el mismo id, lanzar la Exception
-		 */
 		Cliente clienteAux = dao.traerCliente(c.getDni());
 		if (clienteAux == null) {
 			clienteAux = dao.traerCliente(c.getIdCliente());
@@ -57,12 +53,7 @@ public class ClienteABM {
 	}
 
 	public void eliminar(long idCliente) throws Exception {
-		/*
-		 * en este caso es física en gral. no se se aplicaría este caso de uso, si se
-		 * hiciera habría que validar que el cliente no tenga dependencias
-		 */
 		Cliente c = dao.traerCliente(idCliente);
-		// Implementar que si es null que arroje la excepción la Excepción
 		
 		if(c == null) {
 			throw new Exception("El cliente no existe.");
@@ -73,5 +64,16 @@ public class ClienteABM {
 
 	public List<Cliente> traerCliente() {
 		return dao.traerCliente();
+	}
+	
+	public Cliente traerClienteYPrestamos(long idCliente) throws Exception {
+		Cliente c = dao.traerCliente(idCliente);
+		if(c == null) {
+			throw new Exception("El cliente no existe.");
+		}
+		
+		///¿COMO TRAIGO LOS PRESTAMOS?¿YA LOS TENGO EN EL SET?
+		
+		return c;
 	}
 }
