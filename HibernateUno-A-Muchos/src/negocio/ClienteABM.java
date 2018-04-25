@@ -73,7 +73,7 @@ public class ClienteABM {
 		}
 		
 		///¿COMO TRAIGO LOS PRESTAMOS?¿YA LOS TENGO EN EL SET?
-		
+		//inner join fetch y traigo los prestamos 
 		return c;
 	}
 }
