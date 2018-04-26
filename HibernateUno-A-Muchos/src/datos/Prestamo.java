@@ -1,7 +1,10 @@
 package datos;
 
 import java.util.GregorianCalendar;
+import java.util.Set;
+
 import funciones.Fecha;
+import java.math.*;
 
 public class Prestamo {
 	private long idPrestamo;
@@ -10,9 +13,11 @@ public class Prestamo {
 	private double interes;
 	private int cantCuotas;
 	private Cliente cliente;
-	
-	public Prestamo() {}
-	
+	private Set<Cuota> coutas;
+
+	public Prestamo() {
+	}
+
 	public Prestamo(GregorianCalendar fecha, double monto, double interes, int cantCuotas, Cliente cliente) {
 		super();
 		this.fecha = fecha;
@@ -69,10 +74,11 @@ public class Prestamo {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
+
 	public String toString() {
-		String prestamo = "Prestamo: $"+monto+"\nFecha: "+Fecha.traerFechaCorta(fecha)+"\nIntereses: "+interes+"\nCant. de Cuotas: "+cantCuotas;
+		String prestamo = "Prestamo: $" + monto + "\nFecha: " + Fecha.traerFechaCorta(fecha) + "\nIntereses: " + interes
+				+ "\nCant. de Cuotas: " + cantCuotas;
 		return prestamo;
 	}
-	
+
 }

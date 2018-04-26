@@ -20,7 +20,7 @@ public class TestTraerPrestamo {
 			System.out.println(p +"\nPertenece a "+p.getCliente());
 			
 			ClienteABM clienteABM = new ClienteABM();
-			int dni = 14000000;
+			int dni = 39281276;
 			Cliente c = clienteABM.traerCliente(dni);
 			
 			System.out.println("\n---> TraerPerstamo del cliente="+c+"\n\n");

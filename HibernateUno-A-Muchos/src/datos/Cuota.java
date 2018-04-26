@@ -2,8 +2,11 @@ package datos;
 
 import java.util.GregorianCalendar;
 
+import funciones.Fecha;
+
 public class Cuota {
-	
+
+	private int idCuota;
 	private int nroCuota;
 	private GregorianCalendar fechaVencimiento;
 	private double saldoPendiente;
@@ -14,8 +17,11 @@ public class Cuota {
 	private boolean cancelada;
 	private GregorianCalendar fechaDePago;
 	private double punitorios;
-	
-	public Cuota(int nroCuota, GregorianCalendar fechaVencimiento, double saldoPendiente, double amortizacion, double interesCuota, double cuota, double deuda, boolean cancelada, GregorianCalendar fechaDePago, double punitorios) {
+	private Prestamo prestamo;
+
+	public Cuota(int nroCuota, GregorianCalendar fechaVencimiento, double saldoPendiente, double amortizacion,
+			double interesCuota, double cuota, double deuda, boolean cancelada, GregorianCalendar fechaDePago,
+			double punitorios) {
 		this.nroCuota = nroCuota;
 		this.fechaVencimiento = fechaVencimiento;
 		this.saldoPendiente = saldoPendiente;
@@ -26,6 +32,14 @@ public class Cuota {
 		this.cancelada = cancelada;
 		this.fechaDePago = fechaDePago;
 		this.punitorios = punitorios;
+	}
+
+	protected int getIdCuota() {
+		return this.idCuota;
+	}
+
+	protected void setIdCuota(int idCuota) {
+		this.idCuota = idCuota;
 	}
 
 	public int getNroCuota() {
@@ -107,7 +121,21 @@ public class Cuota {
 	public void setPunitorios(double punitorios) {
 		this.punitorios = punitorios;
 	}
+
+	public double calcularAmortizacion() {
+		return (this.getSaldoPendiente() * prestamo.getInteres()) / (Math.pow(1 + prestamo.getInteres(), prestamo.getCantCuotas() - this.nroCuota - 1) - 1);
+	}
 	
+	public double calcularInteresCuota() {
+		return this.getSaldoPendiente() * prestamo.getInteres();
+	}
 	
+	public double calcularValorCuota() {
+		return this.calcularAmortizacion() + this.calcularInteresCuota();
+	}
+	
+	public double calcularSaldoPendiente() {
+		return this.getSaldoPendiente() - this.calcularAmortizacion();
+	}
 
 }

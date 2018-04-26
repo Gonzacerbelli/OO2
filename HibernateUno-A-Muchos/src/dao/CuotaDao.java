@@ -1,8 +1,11 @@
 package dao;
 
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import datos.Cliente;
 import datos.Cuota;
 
 public class CuotaDao {
@@ -60,7 +63,17 @@ public class CuotaDao {
 			session.close();
 		}
 	}
-	
+
+	public Cuota traerCuota(int nroCuota) throws HibernateException {
+		Cuota objeto = null;
+		try {
+			iniciarOperacion();
+			objeto = (Cuota) session.get(Cuota.class, nroCuota);
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
 	
 	
 }
