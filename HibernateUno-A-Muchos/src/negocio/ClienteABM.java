@@ -71,9 +71,6 @@ public class ClienteABM {
 		if(c == null) {
 			throw new Exception("El cliente no existe.");
 		}
-		
-		///¿COMO TRAIGO LOS PRESTAMOS?¿YA LOS TENGO EN EL SET?
-		//inner join fetch y traigo los prestamos 
 		return c;
 	}
 }

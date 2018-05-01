@@ -100,7 +100,7 @@ public class ClienteDao {
 		Cliente objeto = null;
 		try {
 			iniciaOperacion();
-			String hql = "from Cliente c where c.idCliente ="+ idCliente;
+			String hql = "from Cliente as c where c.idCliente ="+ idCliente;
 			objeto = (Cliente) session.createQuery(hql).uniqueResult();
 		} finally {
 			session.close();
