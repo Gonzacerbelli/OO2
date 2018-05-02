@@ -13,10 +13,9 @@ public class Prestamo {
 	private double interes;
 	private int cantCuotas;
 	private Cliente cliente;
-	private Set<Cuota> coutas;
+	private Set<Cuota> cuotas;
 
-	public Prestamo() {
-	}
+	public Prestamo() {}
 
 	public Prestamo(GregorianCalendar fecha, double monto, double interes, int cantCuotas, Cliente cliente) {
 		super();
@@ -73,6 +72,14 @@ public class Prestamo {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Set<Cuota> getCuotas() {
+		return cuotas;
+	}
+
+	public void setCuotas(Set<Cuota> cuotas) {
+		this.cuotas = cuotas;
 	}
 
 	public String toString() {

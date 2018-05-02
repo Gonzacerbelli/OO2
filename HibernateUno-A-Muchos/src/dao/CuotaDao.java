@@ -1,12 +1,15 @@
 package dao;
 
 
+import java.util.List;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import datos.Cliente;
 import datos.Cuota;
+import datos.Prestamo;
 
 public class CuotaDao {
 
@@ -73,6 +76,30 @@ public class CuotaDao {
 			session.close();
 		}
 		return objeto;
+	}
+	
+	public Cuota traerCuota(long idCuota) throws HibernateException {
+		Cuota objeto = null;
+		try {
+			iniciarOperacion();
+			objeto = (Cuota) session.get(Cuota.class, idCuota);
+		} finally {
+			session.close();
+		}
+		return objeto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Cuota> traerCuotas(Prestamo p) throws HibernateException {
+		List<Cuota> lista = null;
+		try {
+			iniciarOperacion();
+			String hQL = "from Cuota c inner join fetch c.prestamo p where p.idPrestamo=" + p.getIdPrestamo();
+			lista = session.createQuery(hQL).list();
+		} finally {
+			session.close();
+		}
+		return lista;
 	}
 	
 	

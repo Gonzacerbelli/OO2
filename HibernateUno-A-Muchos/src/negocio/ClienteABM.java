@@ -67,7 +67,7 @@ public class ClienteABM {
 	}
 	
 	public Cliente traerClienteYPrestamos(long idCliente) throws Exception {
-		Cliente c = dao.traerCliente(idCliente);
+		Cliente c = dao.traerClienteYPrestamos(idCliente);
 		if(c == null) {
 			throw new Exception("El cliente no existe.");
 		}

@@ -1,7 +1,6 @@
 package negocio;
 
 import dao.PrestamoDao;
-
 import java.util.GregorianCalendar;
 import java.util.List;
 import datos.Cliente;
@@ -27,8 +26,7 @@ public class PrestamoABM {
 		return dao.traerPrestamo(c);
 	}
 
-	public int agregar(GregorianCalendar fecha, double monto, double interes, int cantCuotas, Cliente cliente)
-			throws Exception {
+	public int agregar(GregorianCalendar fecha, double monto, double interes, int cantCuotas, Cliente cliente) throws Exception {
 		Prestamo prestamoAux = new Prestamo(fecha, monto, interes, cantCuotas, cliente);
 		return dao.agregar(prestamoAux);
 	}
@@ -36,9 +34,9 @@ public class PrestamoABM {
 	public void modificar(Prestamo p) throws Exception {
 		Prestamo prestamoAux = dao.traerPrestamo(p.getIdPrestamo());
 		if (prestamoAux == null) {
-			dao.actualizar(p);
+			throw new Exception("No existe el prestamo que se quiere modificar.");
 		} else {
-			throw new Exception("Existe un prestamo con el mismo id.");
+			dao.actualizar(p);
 		}
 	}
 

@@ -1,13 +1,30 @@
 package negocio;
 
+import dao.CuotaDao;
 import java.util.GregorianCalendar;
 import java.util.List;
-import dao.CuotaDao;
+import datos.Prestamo;
 import datos.Cuota;
 
 public class CuotaABM {
 	
 	CuotaDao dao = new CuotaDao();
+	
+	public Cuota traerCuota(long idCuota) throws Exception {
+		Cuota c = dao.traerCuota(idCuota);
+		if(c == null) {
+			throw new Exception("La cuota no existe.");
+		}
+		return c;
+	}
+	
+	public List<Cuota> traerCuotas(Prestamo p) throws Exception {
+		List<Cuota> cuotasAux = dao.traerCuotas(p);
+		if(cuotasAux.size() == 0) {
+			throw new Exception("El prestamo no tiene cuotas.");
+		}
+		return dao.traerCuotas(p);
+	}
 
 	public int agregar(int nroCuota, GregorianCalendar fechaVencimiento, double saldoPendiente, double amortizacion, double interesCuota, double cuota, double deuda, boolean cancelada, GregorianCalendar fechaDePago, double punitorios) {
 		Cuota cuotaAux = new Cuota(nroCuota, fechaVencimiento, saldoPendiente, amortizacion, interesCuota, cuota, deuda, cancelada, fechaDePago, punitorios);

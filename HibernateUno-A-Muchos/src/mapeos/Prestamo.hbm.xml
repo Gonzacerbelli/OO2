@@ -12,6 +12,11 @@
 	<property column="interes" name="interes" type="float"/>
 	<property column="cantCuotas" name="cantCuotas" type="int"/>
 	
+	<set name="cuotas" cascade="save-update" table="cuota" order-by="idCuota asc" inverse="true" lazy="true" fetch="select">
+		<key column="idPrestamo" not-null="true"/>
+		<one-to-many class="datos.Cuota"/>
+	</set>
+	
 	<many-to-one name="cliente" class="datos.Cliente" column="idCliente" not-null="true"/>
 
 </class>

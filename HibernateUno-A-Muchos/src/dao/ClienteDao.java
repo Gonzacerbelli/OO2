@@ -1,6 +1,8 @@
 package dao;
 
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -102,6 +104,7 @@ public class ClienteDao {
 			iniciaOperacion();
 			String hql = "from Cliente as c where c.idCliente ="+ idCliente;
 			objeto = (Cliente) session.createQuery(hql).uniqueResult();
+			Hibernate.initialize(objeto.getPrestamos());
 		} finally {
 			session.close();
 		}

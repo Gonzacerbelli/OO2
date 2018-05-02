@@ -2,8 +2,6 @@ package datos;
 
 import java.util.GregorianCalendar;
 
-import funciones.Fecha;
-
 public class Cuota {
 
 	private int idCuota;
@@ -120,6 +118,14 @@ public class Cuota {
 
 	public void setPunitorios(double punitorios) {
 		this.punitorios = punitorios;
+	}
+
+	public Prestamo getPrestamo() {
+		return prestamo;
+	}
+
+	public void setPrestamo(Prestamo prestamo) {
+		this.prestamo = prestamo;
 	}
 
 	public double calcularAmortizacion() {
