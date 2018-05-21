@@ -16,7 +16,7 @@ public class TestAgregarClientePrestamoCuota {
 			
 			System.out.println("\n\nagrego cliente\n");
 			
-			clienteABM.agregar("Cabrera", "Pablo", 39147259, new GregorianCalendar());
+			clienteABM.agregar("Cerbe", "Gonzalo", 39281276, new GregorianCalendar());
 			
 			
 		} catch (Exception e) {
@@ -27,11 +27,11 @@ public class TestAgregarClientePrestamoCuota {
 			
 			System.out.println("\n\ntraigo cliente \n");
 			
-			Cliente cliente = clienteABM.traerCliente(39147259);
+			Cliente cliente = clienteABM.traerCliente(39281276);
 			
 			System.out.println(cliente);
 			
-			System.out.println(" \ncreo prestamo con cuotas \n");
+			System.out.println(" \ncreo prestamo con 6 cuotas \n");
 			
 			prestamoABM.agregar(new GregorianCalendar(), 15000, 43.75, 6, cliente);
 			

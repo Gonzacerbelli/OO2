@@ -28,10 +28,10 @@ public class Cuota {
 		this.amortizacion = calcularAmortizacion();
 		this.interesCuota = calcularInteresCuota();
 		this.cuota = calcularValorCuota();
-		this.deuda = deuda;
-		this.cancelada = cancelada;
-		this.fechaDePago = fechaDePago;
-		this.punitorios = punitorios;
+		this.deuda = calcularDeudaPendiente();
+		this.cancelada = false;
+		this.fechaDePago = null;
+		this.punitorios = 0;
 	}
 
 	public int getIdCuota() {
@@ -131,25 +131,46 @@ public class Cuota {
 	}
 
 	public double calcularAmortizacion() {
-		return (this.getSaldoPendiente() * prestamo.getInteres()) / (Math.pow(1 + prestamo.getInteres(), prestamo.getCantCuotas() - this.nroCuota - 1) - 1);
+		double amortizacion = 0;
+		
+		if(this.getNroCuota() == 1) {
+			amortizacion = (this.getSaldoPendiente() * this.prestamo.getInteres()) / (Math.pow(1 + this.prestamo.getInteres(), this.nroCuota) - 1);
+		}else {
+			amortizacion = (this.getSaldoPendiente() * this.prestamo.getInteres()) / (Math.pow(1 + this.prestamo.getInteres(), this.nroCuota - 1) - 1);
+		}
+		System.out.println("\n\nAmortizacion:"+amortizacion+"\n\n");
+		return amortizacion;
 	}
 	
 	public double calcularInteresCuota() {
+		System.out.println("\n\nInteres cuota:"+this.getSaldoPendiente() * prestamo.getInteres()+"\n\n");
 		return this.getSaldoPendiente() * prestamo.getInteres();
 	}
 	
 	public double calcularValorCuota() {
-		return this.calcularAmortizacion() + this.calcularInteresCuota();
+		System.out.println("\n\nValor cuota:"+this.getAmortizacion() + this.getInteresCuota()+"\n\n");
+		return this.getAmortizacion() + this.getInteresCuota();
+	}
+	
+	public double calcularDeudaPendiente() {
+		this.setSaldoPendiente(calcularSaldoPendiente());
+		System.out.println("\n\nDeuda pendiente:"+this.getSaldoPendiente()-this.getAmortizacion()+"\n\n");
+		return this.getSaldoPendiente()-this.getAmortizacion();
 	}
 	
 	public double calcularSaldoPendiente() {
-		double saldoPendiente = 0;
+		double saldoPendiente = this.getSaldoPendiente();
 
-		if(this.nroCuota == 1) {
-			saldoPendiente = this.prestamo.getMonto();
+		if(this.getNroCuota() == 1) {
+			if(saldoPendiente == 0) {
+				saldoPendiente = this.prestamo.getMonto();
+			}else {
+				saldoPendiente = saldoPendiente-this.getAmortizacion();
+			}
 		}else {
-			saldoPendiente = this.getSaldoPendiente() - this.calcularAmortizacion();
+			saldoPendiente = this.getSaldoPendiente();
 		}
+		System.out.println("\n\nSaldo Pendiente:"+saldoPendiente+"\n\n");
 		return saldoPendiente;
 	}
 
