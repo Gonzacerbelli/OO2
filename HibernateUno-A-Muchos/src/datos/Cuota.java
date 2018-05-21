@@ -16,23 +16,25 @@ public class Cuota {
 	private GregorianCalendar fechaDePago;
 	private double punitorios;
 	private Prestamo prestamo;
+	
+	public Cuota() {};
 
-	public Cuota(int nroCuota, GregorianCalendar fechaVencimiento, double saldoPendiente, double amortizacion,
-			double interesCuota, double cuota, double deuda, boolean cancelada, GregorianCalendar fechaDePago,
-			double punitorios) {
+	public Cuota(int nroCuota, Prestamo prestamo) {
+		
 		this.nroCuota = nroCuota;
-		this.fechaVencimiento = fechaVencimiento;
-		this.saldoPendiente = saldoPendiente;
-		this.amortizacion = amortizacion;
-		this.interesCuota = interesCuota;
-		this.cuota = cuota;
+		this.prestamo = prestamo;
+		this.fechaVencimiento = new GregorianCalendar();
+		this.saldoPendiente = calcularSaldoPendiente();
+		this.amortizacion = calcularAmortizacion();
+		this.interesCuota = calcularInteresCuota();
+		this.cuota = calcularValorCuota();
 		this.deuda = deuda;
 		this.cancelada = cancelada;
 		this.fechaDePago = fechaDePago;
 		this.punitorios = punitorios;
 	}
 
-	protected int getIdCuota() {
+	public int getIdCuota() {
 		return this.idCuota;
 	}
 
@@ -141,7 +143,14 @@ public class Cuota {
 	}
 	
 	public double calcularSaldoPendiente() {
-		return this.getSaldoPendiente() - this.calcularAmortizacion();
+		double saldoPendiente = 0;
+
+		if(this.nroCuota == 1) {
+			saldoPendiente = this.prestamo.getMonto();
+		}else {
+			saldoPendiente = this.getSaldoPendiente() - this.calcularAmortizacion();
+		}
+		return saldoPendiente;
 	}
 
 }

@@ -1,8 +1,8 @@
 package datos;
 
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Set;
-
 import funciones.Fecha;
 import java.math.*;
 
@@ -24,6 +24,7 @@ public class Prestamo {
 		this.interes = interes;
 		this.cantCuotas = cantCuotas;
 		this.cliente = cliente;
+		this.cuotas = new HashSet<Cuota>();
 	}
 
 	public long getIdPrestamo() {
@@ -81,11 +82,18 @@ public class Prestamo {
 	public void setCuotas(Set<Cuota> cuotas) {
 		this.cuotas = cuotas;
 	}
-
+	/*
 	public String toString() {
 		String prestamo = "Prestamo: $" + monto + "\nFecha: " + Fecha.traerFechaCorta(fecha) + "\nIntereses: " + interes
 				+ "\nCant. de Cuotas: " + cantCuotas;
 		return prestamo;
 	}
+	*/
 
+	@Override
+	public String toString() {
+		return "Prestamo [idPrestamo=" + idPrestamo + ", fecha=" + fecha + ", monto=" + monto + ", interes=" + interes
+				+ ", cantCuotas=" + cantCuotas + ", cliente=" + cliente + ", cuotas=" + cuotas + "]";
+	}
+	
 }

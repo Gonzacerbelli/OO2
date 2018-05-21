@@ -5,6 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import datos.Cliente;
 import datos.Prestamo;
+import datos.Cuota;
 
 public class PrestamoABM {
 
@@ -28,6 +29,10 @@ public class PrestamoABM {
 
 	public int agregar(GregorianCalendar fecha, double monto, double interes, int cantCuotas, Cliente cliente) throws Exception {
 		Prestamo prestamoAux = new Prestamo(fecha, monto, interes, cantCuotas, cliente);
+		for (int i = 0; i < cantCuotas; i++) {
+			Cuota cuota = new Cuota(i+1, prestamoAux);
+			prestamoAux.getCuotas().add(cuota);
+		}
 		return dao.agregar(prestamoAux);
 	}
 

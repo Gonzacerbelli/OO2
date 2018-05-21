@@ -1,13 +1,9 @@
 package dao;
 
-
 import java.util.List;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import datos.Cliente;
 import datos.Cuota;
 import datos.Prestamo;
 
@@ -66,23 +62,13 @@ public class CuotaDao {
 			session.close();
 		}
 	}
-
-	public Cuota traerCuota(int nroCuota) throws HibernateException {
-		Cuota objeto = null;
-		try {
-			iniciarOperacion();
-			objeto = (Cuota) session.get(Cuota.class, nroCuota);
-		} finally {
-			session.close();
-		}
-		return objeto;
-	}
 	
 	public Cuota traerCuota(long idCuota) throws HibernateException {
 		Cuota objeto = null;
 		try {
 			iniciarOperacion();
-			objeto = (Cuota) session.get(Cuota.class, idCuota);
+			String hQL = "from cuota c where c.idCuota=" + idCuota;
+			objeto = (Cuota) session.createQuery(hQL).uniqueResult();
 		} finally {
 			session.close();
 		}
