@@ -3,11 +3,12 @@ import negocio.ClienteABM;
 import negocio.PrestamoABM;
 import datos.Cliente;
 import java.util.GregorianCalendar;
+import funciones.Fecha;
 
 public class TestAgregarClientePrestamoCuota {
 
 	public static void main(String[] args) {
-
+		
 		ClienteABM clienteABM = new ClienteABM();
 		
 		PrestamoABM prestamoABM = new PrestamoABM();
@@ -16,7 +17,7 @@ public class TestAgregarClientePrestamoCuota {
 			
 			System.out.println("\n\nagrego cliente\n");
 			
-			clienteABM.agregar("Cerbe", "Gonzalo", 39281276, new GregorianCalendar());
+			clienteABM.agregar("Cerbelli", "Gonzalo", 39281276, new GregorianCalendar());
 			
 			
 		} catch (Exception e) {
@@ -33,12 +34,15 @@ public class TestAgregarClientePrestamoCuota {
 			
 			System.out.println(" \ncreo prestamo con 6 cuotas \n");
 			
-			prestamoABM.agregar(new GregorianCalendar(), 15000, 43.75, 6, cliente);
+			prestamoABM.agregar(new GregorianCalendar(), 10000, 0.03, 36, cliente);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
+		
+		
+		
 	}
 
 }
